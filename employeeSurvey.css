@@ -24,8 +24,6 @@ body {
   background-color: #f2f2f2;
   min-width: 50vw;
   min-height: 50vh;
-  /*   max-width: 55vw; */
-  /* max-height: 85vh; */
   padding: 2vh 1.05%;
   box-shadow: 26px 26px 30px -26px #888888;
   border-radius: 10px;
@@ -127,9 +125,7 @@ input[type="number"] {
 
 .minimizedPanel {
   background-color: #fff8e0;
-
   min-height: 35px;
-
   margin-right: 0.6vw;
   border: 1px solid black;
   display: flex;
@@ -151,16 +147,9 @@ input[type="number"] {
 #submittedDisplay {
   align-self: center;
   min-width: 95vw;
-  /*     min-height:75vh; */
   background: rgba(0, 0, 0, 0.75);
-
-  /*     left:20vw; */
-  /*     top:20vh; */
   top: 2vh;
-
   min-height: 95vh;
-  /*    margin-top: -40vh; */
-
   margin: auto;
   position: absolute;
   display: flex;
@@ -191,7 +180,6 @@ input[type="number"] {
     min-height: 60vh;
     max-width: 90vw;
     margin: auto;
-    /*     box-shadow: 3px 3px 10px #b3b3b3; */
     box-shadow: unset;
   }
 
