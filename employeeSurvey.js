@@ -1,10 +1,5 @@
-
-//Object freeze
-//test on Firefox
-//upload to Github
 //finish functional programming lessons
 //clean css
-
 
 const panelObjectList = createPanelObjects();
 
@@ -18,9 +13,9 @@ panelObjectList.forEach(thisPanelObject => {
   buttonCreator(thisPanelObject, isFinalPanel);
 
   if (!isFinalPanel) {
-    addProgressButtonEventListener(thisPanelObject, panelObjectList); //needs fix //function already exists = getParentPanelObjectFromEvent
+    addProgressButtonEventListener(thisPanelObject, panelObjectList); 
   } else if (isFinalPanel) {
-    addSubmitButtonEventListener(thisPanelObject); //needs cleaning
+    addSubmitButtonEventListener(thisPanelObject); 
   }
 
   addCheckmarkListener(thisPanelObject, panelObjectList);
@@ -39,11 +34,9 @@ window.onresize = () => {
 
 };
 
-
 //display the first panel to begin
 
 panelObjectList[0].getPanelElement().style.display = "flex";
-
 
 
 function buttonCreator(thisPanelObject, finalPanel) {
@@ -66,25 +59,73 @@ function buttonCreator(thisPanelObject, finalPanel) {
   thisPanelObject.setButtonElement(newButton);
 }
 
-function insertPanelIntoDOM(thisPanelObject) {
-  const panelForInsertion = convertHTMLToDOMElement(thisPanelObject.getHTML());
+function addProgressButtonEventListener(panelObject, panelList) {
+  panelObject.getButtonElement().addEventListener("click", function (event) {
+    const parentPanelObject = getParentPanelObjectFromEvent(event, panelList);
+  
+    parentPanelObject.getPanelElement().style.display = "none";
 
-  thisPanelObject.setPanelElement(panelForInsertion);
-
-  thisPanelObject
-    .getPanelElement()
-    .appendChild(thisPanelObject.getButtonElement());
-
-  document
-    .getElementById("survey-form")
-    .appendChild(thisPanelObject.getPanelElement());
+    advanceToNextPanel(parentPanelObject, panelList);
+  });
 }
 
-//function that takes raw HTML and returns a DOM element object
-//function creates an entirely new HTML page but returns only the first instance of an element with class of panel
-function convertHTMLToDOMElement(html) {
-  const parser = new DOMParser();
-  return parser.parseFromString(html, "text/html").getElementsByClassName("panel")[0];
+function advanceToNextPanel(thisPanelObject, panelList) {
+  if (thisPanelObject.getIdNumber() < panelList.length) {
+    const nextPanelInStack = panelList[thisPanelObject.getIdNumber()];
+
+    nextPanelInStack.getPanelElement().style.display = "flex";
+  }
+}
+
+function addSubmitButtonEventListener(thisPanelObject) {
+  thisPanelObject.getButtonElement().addEventListener("click", event => {
+    if (!document.getElementById("submittedDisplay")) {
+      const submittedDiv = document.createElement("div");
+
+      submittedDiv.id = "submittedDisplay";
+
+      const submittedText = document.createElement("p");
+      submittedText.innerText = "Survey Completed.";
+
+      const checkIcon = document.createElement("i");
+      checkIcon.className = "far fa-check-circle fa-5x";
+
+      submittedDiv.appendChild(submittedText);
+      submittedDiv.appendChild(checkIcon);
+
+      document.body.appendChild(submittedDiv);
+
+      addBodyClickEventListener(thisPanelObject);
+    }
+    document.getElementById("submittedDisplay").style.display = "flex";
+  });
+}
+
+function addBodyClickEventListener(panelObject) {
+
+  document.body.addEventListener("click", bodyEvent => {
+    
+    //do nothing if user clicks on a submit button
+    if (
+      !testEventPathForElement(bodyEvent.target, panelObject.getButtonElement())
+    ) {
+      const submittedDiv = document.getElementById("submittedDisplay");
+
+      submittedDiv.style.display = "none";
+    }
+  });
+}
+
+function testEventPathForElement(eventTarget, element) {
+  while (eventTarget != null) {
+
+    if (eventTarget === element) {
+      return true;
+    }
+
+    eventTarget = eventTarget.parentNode;
+  }
+  return false;
 }
 
 function addCheckmarkListener(thisPanelObject, panelList) {
@@ -114,6 +155,27 @@ function getParentPanelObjectFromEvent(event, panelList) {
   }
 
   return panelList.find(panelObject => panelObject.getPanelElement() === parentNode);
+}
+
+function insertPanelIntoDOM(thisPanelObject) {
+  const panelForInsertion = convertHTMLToDOMElement(thisPanelObject.getHTML());
+
+  thisPanelObject.setPanelElement(panelForInsertion);
+
+  thisPanelObject
+    .getPanelElement()
+    .appendChild(thisPanelObject.getButtonElement());
+
+  document
+    .getElementById("survey-form")
+    .appendChild(thisPanelObject.getPanelElement());
+}
+
+//function that takes raw HTML and returns a DOM element object
+//function creates an entirely new HTML page but returns only the first instance of an element with class of panel
+function convertHTMLToDOMElement(html) {
+  const parser = new DOMParser();
+  return parser.parseFromString(html, "text/html").getElementsByClassName("panel")[0];
 }
 
 function visibilityChangeDetector(thisPanelObject, panelList) {
@@ -186,74 +248,6 @@ function hideAllPanels(panelList) {
       panelObject.getPanelElement().style.display = "none";
     }
   });
-}
-
-function addProgressButtonEventListener(panelObject, panelList) {
-  panelObject.getButtonElement().addEventListener("click", function (event) {
-    //write a function here to get the panel object from the panel that is hosting the button  
-    panelObject.getPanelElement().style.display = "none"; //needs fix!
-
-    advanceToNextPanel(panelObject, panelList);
-  });
-}
-
-function advanceToNextPanel(thisPanelObject, panelList) {
-  if (thisPanelObject.getIdNumber() < panelList.length) {
-    const nextPanelInStack = panelList[thisPanelObject.getIdNumber()];
-
-    nextPanelInStack.getPanelElement().style.display = "flex";
-  }
-}
-
-function addSubmitButtonEventListener(thisPanelObject) {
-  thisPanelObject.getButtonElement().addEventListener("click", event => {
-    if (!document.getElementById("submittedDisplay")) {
-      const submittedDiv = document.createElement("div");
-
-      submittedDiv.id = "submittedDisplay";
-
-      const submittedText = document.createElement("p");
-      submittedText.innerText = "Survey Completed.";
-
-      const checkIcon = document.createElement("i");
-      checkIcon.className = "far fa-check-circle fa-5x";
-
-      submittedDiv.appendChild(submittedText);
-      submittedDiv.appendChild(checkIcon);
-
-      document.body.appendChild(submittedDiv);
-
-      addBodyClickEventListener(thisPanelObject);
-    }
-    document.getElementById("submittedDisplay").style.display = "flex";
-  });
-}
-
-function addBodyClickEventListener(panelObject) {
-
-  document.body.addEventListener("click", bodyEvent => {
-    
-    //do nothing if user clicks on a submit button
-    if (
-      !testEventPathForElement(bodyEvent.target, panelObject.getButtonElement())
-    ) {
-      const submittedDiv = document.getElementById("submittedDisplay");
-
-      submittedDiv.style.display = "none";
-    }
-  });
-}
-
-function testEventPathForElement(eventTarget, element) {
-  while (eventTarget != null) {
-
-    if (eventTarget === element) {
-      return true;
-    }
-
-    eventTarget = eventTarget.parentNode;
-  }
-  return false;
 }
 
 function changeMiniDivTextToMatchScreenSize(size) {
@@ -411,5 +405,3 @@ function createPanelObject(idNumber) {
     getPanelElement
   };
 }
-
-//757 9/26/18  
