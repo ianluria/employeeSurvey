@@ -284,15 +284,15 @@ function createPanelObjects() {
       <legend id="titleID">Personal Information</legend>
       <div class="fieldsetElement">
       <label for="name" id="name-label">Enter your full name: </label>
-      <input type="text" id="name" name="name">
+      <input type="text" id="nameInput" name="name" class="userInput" placeholder="first last" required>
       </div>
 <div class="fieldsetElement">
       <label for="email" id="email-label">Enter your email address: </label>
-      <input type="email" id="email" name="email">
+      <input type="email" id="emailInput" name="email" class="userInput" placeholder="name@youremail.com" required>
       </div>
 <div class="fieldsetElement">
       <label for="number" id="number-label">Enter your new employee ID: </label>
-      <input type="number" id="number" min="1000" max="9999" name="IDnumber">
+      <input type="number" id="numberInput" min="1000" max="9999" class="userInput" name="IDnumber">
 </div>
     </fieldset>
   </div>`);

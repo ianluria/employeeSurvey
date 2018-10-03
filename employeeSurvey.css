@@ -76,15 +76,27 @@ textarea[name="comments"] {
   font-size: 1.1em;
 }
 
-input[type="text"],
+/* input[type="text"],
 input[type="email"],
-input[type="number"] {
+input[type="number"] */
+
+.userInput{
   border: 1px solid black;
   margin-top: 0.5vh;
   font-size: 1.0em;
   border-radius: 3.5px;
   padding-left: 4px;
 }
+
+.userInput:valid{
+  border: 1.5px solid green;
+}
+
+.userInput:invalid{
+  
+  border: 1.5px solid red;
+}
+
 
 .trainingCheckbox{
   margin-bottom: 0.9vh;
