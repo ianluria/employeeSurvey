@@ -80,7 +80,7 @@ textarea[name="comments"] {
 input[type="email"],
 input[type="number"] */
 
-.userInput{
+.requiredUserInput{
   border: 1px solid black;
   margin-top: 0.5vh;
   font-size: 1.0em;
@@ -88,12 +88,11 @@ input[type="number"] */
   padding-left: 4px;
 }
 
-.userInput:valid{
+.inputValid{
   border: 1.5px solid green;
 }
 
-.userInput:invalid{
-  
+.inputInvalid{
   border: 1.5px solid red;
 }
 

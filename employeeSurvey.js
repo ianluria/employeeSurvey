@@ -13,18 +13,20 @@ panelObjectList.forEach(thisPanelObject => {
   buttonCreator(thisPanelObject, isFinalPanel);
 
   if (!isFinalPanel) {
-    addProgressButtonEventListener(thisPanelObject, panelObjectList); 
+    addProgressButtonEventListener(thisPanelObject, panelObjectList);
   } else if (isFinalPanel) {
-    addSubmitButtonEventListener(thisPanelObject); 
+    addSubmitButtonEventListener(thisPanelObject);
   }
 
   addCheckmarkListener(thisPanelObject, panelObjectList);
 
-  insertPanelIntoDOM(thisPanelObject); 
-  
+  insertPanelIntoDOM(thisPanelObject);
+
   thisPanelObject.getPanelElement().style.display = "none";
 
   visibilityChangeDetector(thisPanelObject, panelObjectList);
+
+  requiredInputAlerter(thisPanelObject);
 });
 
 
@@ -62,7 +64,7 @@ function buttonCreator(thisPanelObject, finalPanel) {
 function addProgressButtonEventListener(panelObject, panelList) {
   panelObject.getButtonElement().addEventListener("click", function (event) {
     const parentPanelObject = getParentPanelObjectFromEvent(event, panelList);
-  
+
     parentPanelObject.getPanelElement().style.display = "none";
 
     advanceToNextPanel(parentPanelObject, panelList);
@@ -104,7 +106,7 @@ function addSubmitButtonEventListener(thisPanelObject) {
 function addBodyClickEventListener(panelObject) {
 
   document.body.addEventListener("click", bodyEvent => {
-    
+
     //do nothing if user clicks on a submit button
     if (
       !testEventPathForElement(bodyEvent.target, panelObject.getButtonElement())
@@ -270,6 +272,29 @@ function changeMiniDivTextToMatchScreenSize(size) {
   });
 }
 
+function requiredInputAlerter(thisPanelObject) {
+
+  const requiredInputs = thisPanelObject.getPanelElement().querySelectorAll(".requiredUserInput");
+
+  [...requiredInputs].forEach(requiredInput => {
+
+    requiredInput.onchange = (event) => {
+
+      let addStatus, removeStatus;
+
+      if (event.target.checkValidity()) {
+        addStatus = "inputValid";
+        removeStatus = "inputInvalid";
+      } else {
+        addStatus = "inputInvalid";
+        removeStatus = "inputValid";
+      }
+      event.target.classList.add(addStatus);
+      event.target.classList.remove(removeStatus)
+    }
+  });
+}
+
 function createPanelObjects() {
   const PanelObject = createPanelObject;
 
@@ -284,15 +309,15 @@ function createPanelObjects() {
       <legend id="titleID">Personal Information</legend>
       <div class="fieldsetElement">
       <label for="name" id="name-label">Enter your full name: </label>
-      <input type="text" id="nameInput" name="name" class="userInput" placeholder="first last" required>
+      <input type="text" id="nameInput" name="name" class="requiredUserInput" placeholder="first last" required>
       </div>
 <div class="fieldsetElement">
       <label for="email" id="email-label">Enter your email address: </label>
-      <input type="email" id="emailInput" name="email" class="userInput" placeholder="name@youremail.com" required>
+      <input type="email" id="emailInput" name="email" class="requiredUserInput" placeholder="name@youremail.com" required>
       </div>
 <div class="fieldsetElement">
       <label for="number" id="number-label">Enter your new employee ID: </label>
-      <input type="number" id="numberInput" min="1000" max="9999" class="userInput" name="IDnumber">
+      <input type="number" id="numberInput" min="1000" max="9999" class="requiredUserInput" name="IDnumber">
 </div>
     </fieldset>
   </div>`);
