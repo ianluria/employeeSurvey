@@ -47,11 +47,11 @@ fieldset {
 }
 
 fieldset,
-.description {
+.description, h1 {
   font-size: 1.1em;
 }
 
-select#experienceDropdown {
+select#dropdown {
   padding: 0.8%;
 }
 

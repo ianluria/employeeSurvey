@@ -49,6 +49,7 @@ function buttonCreator(thisPanelObject, finalPanel) {
 
   if (finalPanel) {
     newButton.classList.add("submitButton");
+    newButton.id = "submit";
     text = "Submit";
   } else {
     newButton.classList.add("progressButton");
@@ -286,11 +287,11 @@ function requiredInputAlerter(thisPanelObject) {
       if (event.target.checkValidity()) {
         addStatus = "inputValid";
         removeStatus = "inputInvalid";
-        if (requiredInput.id === "nameInput") nameInputErrorMessage(true);
+        if (requiredInput.id === "name") nameInputErrorMessage(true);
       } else {
         addStatus = "inputInvalid";
         removeStatus = "inputValid";
-        if (requiredInput.id === "nameInput") nameInputErrorMessage(false);
+        if (requiredInput.id === "name") nameInputErrorMessage(false);
 
       }
       event.target.classList.add(addStatus);
@@ -301,9 +302,9 @@ function requiredInputAlerter(thisPanelObject) {
 
 function nameInputErrorMessage(valid) {
   if (valid) {
-    document.getElementById("nameInput").setCustomValidity("");
+    document.getElementById("name").setCustomValidity("");
   } else {
-    document.getElementById("nameInput").setCustomValidity("Format: FIRST LAST(- LAST)");
+    document.getElementById("name").setCustomValidity("Format: FIRST LAST(- LAST)");
   }
 }
 
@@ -314,22 +315,21 @@ function createPanelObjects() {
 
   panel1.setHTML(`<div id="panel1" class="panel">
 
-    <div class="description"><p><b>Welcome to the Ogden Mining Company.</b></p>
-<p>We are excitied to have you as part of our team. We are growing rapidly to meet the global demand for salt.</p><p>Please take a moment to fill out your information.</p></div>
-
+<div class="description"><h1>Welcome to the Ogden Mining Company.</h1>
+    <p>We are excitied to have you as part of our team. We are growing rapidly to meet the global demand for salt.</p><p>Please take a moment to fill out your information.</p></div>
     <fieldset>
       <legend id="titleID">Personal Information</legend>
       <div class="fieldsetElement">
       <label for="name" id="name-label">Enter your full name: </label>
-      <input type="text" id="nameInput" name="name" class="requiredUserInput" placeholder="first last" pattern="^[A-Za-z]+\\s[A-Za-z]+[\\s-]*[A-Za-z.]*$" required>
+      <input type="text" id="name" name="name" class="requiredUserInput" placeholder="first last" pattern="^[A-Za-z]+\\s[A-Za-z]+[\\s-]*[A-Za-z.]*$" required>
       </div>
 <div class="fieldsetElement">
       <label for="email" id="email-label">Enter your email address: </label>
-      <input type="email" id="emailInput" name="email" class="requiredUserInput" placeholder="name@youremail.com" required>
+      <input type="email" id="email" name="email" class="requiredUserInput" placeholder="name@youremail.com" required>
       </div>
 <div class="fieldsetElement">
       <label for="number" id="number-label">Enter your new employee ID: </label>
-      <input type="number" id="numberInput" min="1000" max="9999" class="requiredUserInput" name="IDnumber">
+      <input type="number" id="number" min="1000" max="9999" class="requiredUserInput" name="IDnumber">
 </div>
     </fieldset>
   </div>`);
@@ -342,7 +342,7 @@ function createPanelObjects() {
 <div class="fieldsetElement">
       <label for="experienceDropdown">Please select your level of experience within the mining industry:</label>
 <br>
-      <select id="experienceDropdown" name="experience" class="fieldsetElementJr">
+      <select id="dropdown" name="experience" class="fieldsetElementJr">
       <option value="none">No Experience.  My first job in mining.</option>
       <option value="lessthanone">Less than one year.</option>
       <option value="oneyear">More than one year.</option>
