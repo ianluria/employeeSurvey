@@ -309,7 +309,7 @@ function createPanelObjects() {
       <legend id="titleID">Personal Information</legend>
       <div class="fieldsetElement">
       <label for="name" id="name-label">Enter your full name: </label>
-      <input type="text" id="nameInput" name="name" class="requiredUserInput" placeholder="first last" required>
+      <input type="text" id="nameInput" name="name" class="requiredUserInput" placeholder="first last" pattern="^[A-Za-z]+\\s[A-Za-z]+[\\s-]*[A-Za-z.]*$" required>
       </div>
 <div class="fieldsetElement">
       <label for="email" id="email-label">Enter your email address: </label>

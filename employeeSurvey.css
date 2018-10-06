@@ -89,11 +89,11 @@ input[type="number"] */
 }
 
 .inputValid{
-  border: 1.5px solid green;
+  border: 1.2px solid green;
 }
 
 .inputInvalid{
-  border: 1.5px solid red;
+  border: 1.2px solid red;
 }
 
 
