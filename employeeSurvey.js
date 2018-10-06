@@ -285,14 +285,27 @@ function requiredInputAlerter(thisPanelObject) {
       if (event.target.checkValidity()) {
         addStatus = "inputValid";
         removeStatus = "inputInvalid";
+        if (requiredInput.id === "nameInput") nameInputErrorMessage(true);
       } else {
         addStatus = "inputInvalid";
         removeStatus = "inputValid";
+        if (requiredInput.id === "nameInput") nameInputErrorMessage(false);
+
       }
       event.target.classList.add(addStatus);
       event.target.classList.remove(removeStatus)
     }
+
+    
   });
+}
+
+function nameInputErrorMessage(valid){
+if (valid){
+document.getElementById("nameInput").setCustomValidity("");
+} else {
+document.getElementById("nameInput").setCustomValidity("Format: FIRST LAST(- LAST)");
+}
 }
 
 function createPanelObjects() {
