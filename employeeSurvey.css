@@ -76,10 +76,6 @@ textarea[name="comments"] {
   font-size: 1.1em;
 }
 
-/* input[type="text"],
-input[type="email"],
-input[type="number"] */
-
 .requiredUserInput{
   border: 1px solid black;
   margin-top: 0.5vh;
@@ -115,15 +111,12 @@ input[type="number"] */
   align-items: center;
   border: 1px solid black;
   border-radius: 10px;
+  padding: 8px;
+  font-size: 0.9em;
 }
 
 .buttonClass:hover {
   background-color: #ddb3ff;
-}
-
-.buttonClass p {
-  font-size: 1em;
-  margin: 10px;
 }
 
 #flexDiv {

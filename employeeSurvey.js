@@ -42,9 +42,9 @@ panelObjectList[0].getPanelElement().style.display = "flex";
 
 
 function buttonCreator(thisPanelObject, finalPanel) {
-  const newButton = document.createElement("div");
+  const newButton = document.createElement("button");
   newButton.classList.add("buttonClass");
-  const buttonText = document.createElement("p");
+  newButton.type = "button";
   let text = "";
 
   if (finalPanel) {
@@ -55,8 +55,7 @@ function buttonCreator(thisPanelObject, finalPanel) {
     text = "Next Page";
   }
 
-  buttonText.appendChild(document.createTextNode(text));
-  newButton.appendChild(buttonText);
+  newButton.appendChild(document.createTextNode(text));
 
   thisPanelObject.setButtonElement(newButton);
 }
@@ -252,6 +251,8 @@ function hideAllPanels(panelList) {
   });
 }
 
+
+
 function changeMiniDivTextToMatchScreenSize(size) {
   if (size < 500) {
     size = "small";
@@ -295,17 +296,15 @@ function requiredInputAlerter(thisPanelObject) {
       event.target.classList.add(addStatus);
       event.target.classList.remove(removeStatus)
     }
-
-    
   });
 }
 
-function nameInputErrorMessage(valid){
-if (valid){
-document.getElementById("nameInput").setCustomValidity("");
-} else {
-document.getElementById("nameInput").setCustomValidity("Format: FIRST LAST(- LAST)");
-}
+function nameInputErrorMessage(valid) {
+  if (valid) {
+    document.getElementById("nameInput").setCustomValidity("");
+  } else {
+    document.getElementById("nameInput").setCustomValidity("Format: FIRST LAST(- LAST)");
+  }
 }
 
 function createPanelObjects() {
