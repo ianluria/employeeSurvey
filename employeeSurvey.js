@@ -49,7 +49,7 @@ function buttonCreator(thisPanelObject, finalPanel) {
 
   if (finalPanel) {
     newButton.classList.add("submitButton");
-    newButton.id = "submit";
+    newButton.id = "submit1";
     text = "Submit";
   } else {
     newButton.classList.add("progressButton");
@@ -315,8 +315,8 @@ function createPanelObjects() {
 
   panel1.setHTML(`<div id="panel1" class="panel">
 
-<div class="description"><h1>Welcome to the Ogden Mining Company.</h1>
-    <p>We are excitied to have you as part of our team. We are growing rapidly to meet the global demand for salt.</p><p>Please take a moment to fill out your information.</p></div>
+<div class="opening"><h1 id="title">Welcome to the Ogden Mining Company.</h1>
+    <p id="description">We are excitied to have you as part of our team. We are growing rapidly to meet the global demand for salt.</p><p>Please take a moment to fill out your information.</p></div>
     <fieldset>
       <legend id="titleID">Personal Information</legend>
       <div class="fieldsetElement">
@@ -329,7 +329,7 @@ function createPanelObjects() {
       </div>
 <div class="fieldsetElement">
       <label for="number" id="number-label">Enter your new employee ID: </label>
-      <input type="number" id="number" min="1000" max="9999" class="requiredUserInput" name="IDnumber">
+      <input type="number" id="number" min="1000" max="9999" class="requiredUserInput" name="IDnumber" placeholder=">=1000">
 </div>
     </fieldset>
   </div>`);
@@ -378,7 +378,7 @@ function createPanelObjects() {
       <textarea name="comments" id="comments"></textarea>
 </div>
     </fieldset>
-
+<button id="submit">Submit</button>
   </div>`);
 
   return [panel1, panel2, panel3];

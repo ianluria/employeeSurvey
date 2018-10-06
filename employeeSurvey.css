@@ -32,12 +32,12 @@ body {
   justify-content: space-around;
 }
 
-.description {
+.opening {
   margin-bottom: 1vh;
   max-width: 50vw;
 }
 
-.description > p {
+.opening > p {
   margin: 1vh 0vw;
 }
 
@@ -47,7 +47,7 @@ fieldset {
 }
 
 fieldset,
-.description, h1 {
+.opening, h1 {
   font-size: 1.1em;
 }
 
@@ -168,6 +168,10 @@ textarea[name="comments"] {
   text-align: center;
 }
 
+#submit{
+  display: none;
+}
+
 .fa-check-circle {
   color: #00e600;
 }
@@ -188,7 +192,7 @@ textarea[name="comments"] {
   }
 
   .panel fieldset,
-  .description {
+  .opening {
     font-size: 1em;
     max-width: 300px;
   }
